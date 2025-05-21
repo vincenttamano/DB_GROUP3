@@ -17,15 +17,7 @@ $current_year = date("Y");
 
 require 'db.php'; // Adjust the path if necessary
 
-// --- PHP Logic for Fetching Programs for the Dropdown ---
-// This block is no longer strictly needed on THIS page
-// as the filter dropdown has been moved back to filterSearchAlumniADMIN.php
 $programs_list = []; // Initialize an empty array
-// $sql_programs = "SELECT DISTINCT college_and_course FROM alumni ORDER BY college_and_course";
-// $result_programs = $conn->query($sql_programs);
-// if ($result_programs === false) { error_log("Error fetching programs for dropdown: " . $conn->error); }
-// else { while($row_programs = $result_programs->fetch_assoc()) { if (!empty($row_programs['college_and_course'])) { $programs_list[] = htmlspecialchars($row_programs['college_and_course']); } } $result_programs->free(); }
-// $conn->close(); // Close the database connection
 
 // Re-close the connection if it was opened, as we won't use it here anymore
 if (isset($conn) && $conn instanceof mysqli) {
@@ -680,6 +672,11 @@ if (isset($conn) && $conn instanceof mysqli) {
                     </div>
 
                     <div class="form-group">
+                        <label for="updateThesisDate">Thesis Date:</label>
+                        <input type="text" id="updateThesisDate" name="thesis_date">
+                    </div>
+
+                    <div class="form-group">
                         <label for="updateCurrentProfession">Current Profession:</label>
                         <input type="text" id="updateCurrentProfession" name="current_profession">
                     </div>
@@ -752,11 +749,14 @@ if (isset($conn) && $conn instanceof mysqli) {
                     <label for="addGraduationYear">Graduation Year:</label>
                     <input type="number" id="addGraduationYear" name="graduation_year" required min="1900" max="3000" value="<?php echo date('Y'); ?>">
 
-                    <label for="addThesisGroupId">Thesis Group ID (Optional):</label>
+                    <label for="addThesisGroupId">Thesis Group ID:</label>
                     <input type="text" id="addThesisGroupId" name="thesis_group_id">
 
-                    <label for="addThesisTitle">Thesis Title (Optional):</label>
+                    <label for="addThesisTitle">Thesis Title:</label>
                     <input type="text" id="addThesisTitle" name="thesis_title">
+
+                    <label for="addThesisDate">Thesis Date:</label>
+                    <input type="text" id="addThesisDate" name="thesis_date">
 
                     <button type="submit">Add Alumnus</button>
                     <div id="addMessage" class="form-message" style="display: none;"></div>
@@ -941,6 +941,7 @@ if (isset($conn) && $conn instanceof mysqli) {
                             <p><strong>Graduation Year:</strong> ${htmlspecialchars(alumnus.graduation_year ?? '')}</p>
                             <p><strong>Thesis Group ID:</strong> ${htmlspecialchars(alumnus.thesis_group_id ?? '')}</p>
                             <p><strong>Thesis Title:</strong> ${htmlspecialchars(alumnus.thesis_title ?? '')}</p>
+                            <p><strong>Thesis Date:</strong> ${htmlspecialchars(alumnus.thesis_date ?? '')}</p>
                         `;
 
                         let workExpHtml = '';
@@ -1023,18 +1024,6 @@ if (isset($conn) && $conn instanceof mysqli) {
                        .replace(/'/g, "&#039;");
         }
 
-
-        // --- AJAX Functions for Delete (Removed from this page) ---
-        // Delete functionality now resides only on filterSearchAlumniADMIN.php
-
-        // Removed addDeleteEventListeners()
-        // Removed handleDeleteClick()
-        // Removed deleteRecord()
-
-        // Removed event listeners for filter inputs as they are not on this page
-        // document.querySelectorAll('#searchName, #statusFilter, #programFilter, #yearFilter').forEach(el => { ... });
-
-
         // --- JavaScript for Update Alumni Tab ---
         document.addEventListener('DOMContentLoaded', function() {
             const updateTab = document.getElementById('update-alumni');
@@ -1079,6 +1068,7 @@ if (isset($conn) && $conn instanceof mysqli) {
                              updateForm.querySelector('#updateGraduationYear').value = alumnus.graduation_year ?? '';
                              updateForm.querySelector('#updateThesisGroupId').value = alumnus.thesis_group_id ?? ''; // Populate new field
                              updateForm.querySelector('#updateThesisTitle').value = alumnus.thesis_title ?? ''; // Populate thesis title
+                            updateForm.querySelector('#updateThesisDate').value = alumnus.thesis_date ?? ''; // Populate thesis date
                              updateForm.querySelector('#updateCurrentProfession').value = alumnus.current_work_exp?.current_profession ?? '';
                              updateForm.querySelector('#updateCurrentWorkDesc').value = alumnus.current_work_exp?.current_work_desc ?? '';
 

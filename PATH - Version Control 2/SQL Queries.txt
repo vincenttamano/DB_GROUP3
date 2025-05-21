@@ -5,7 +5,7 @@ CREATE TABLE `alumni` ( `alumni_profile_id` int(11) NOT NULL, `alumni_id` varcha
 CREATE TABLE `faculty` ( `id` int(11) NOT NULL, `faculty_id` varchar(20) DEFAULT NULL, `email` varchar(50) NOT NULL, `password` varchar(255) NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ALTER TABLE `faculty` CHANGE `id` `faculty_profile_id` INT(11) NOT NULL AUTO_INCREMENT;
 
-CREATE TABLE `thesis` ( `thesis_id` int(11) NOT NULL, `alumni_id` varchar(50) DEFAULT NULL, `title` varchar(255) NOT NULL, `thesis_group_id` varchar(255) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `thesis` ( `thesis_id` int(11) NOT NULL, `alumni_id` varchar(50) DEFAULT NULL, `title` varchar(255) NOT NULL, `thesis_group_id` varchar(255) DEFAULT NULL, `thesis_date` varchar(100) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 	
 CREATE TABLE `work_exp_current` ( `id` int(11) NOT NULL, `alumni_id` varchar(50) NOT NULL, `current_profession` varchar(255) DEFAULT NULL, `current_work_desc` text DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

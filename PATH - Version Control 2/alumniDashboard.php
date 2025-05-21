@@ -635,7 +635,7 @@ $conn->close();
             <td><input type="text" name="previous_work_desc[]"></td>
             <td><input type="text" name="previous_company[]"></td>
             <td><input type="text" name="previous_work_date[]"></td>
-            <td><button type="button" class="removePrevBtn">X</button></td>
+            <td><button type="button" class="removePrevBtn">Remove</button></td>
         `;
         tbody.appendChild(tr);
     });

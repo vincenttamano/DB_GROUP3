@@ -35,6 +35,7 @@ $sql = "SELECT
             a.college_and_course,
             a.graduation_year,
             t.thesis_group_id,
+            t.thesis_date,
             t.title AS thesis_title
         FROM
             alumni a

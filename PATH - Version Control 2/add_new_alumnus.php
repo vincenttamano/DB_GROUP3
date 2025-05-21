@@ -32,6 +32,7 @@ $college_and_course = trim($_POST['college_and_course']);
 $graduation_year = $_POST['graduation_year']; // year(4) can be string or int
 $thesis_group_id = trim($_POST['thesis_group_id'] ?? '');
 $thesis_title = trim($_POST['thesis_title'] ?? '');
+$thesis_date = trim($_POST['thesis_date'] ?? '');
 
 // Check for duplicate email or student_id
 $stmt = $conn->prepare("SELECT alumni_id FROM alumni WHERE email = ? OR student_id = ?");
@@ -88,9 +89,9 @@ $stmt->bind_param(
 if ($stmt->execute()) {
     // If thesis info is provided, insert into thesis table
     if (!empty($thesis_group_id) && !empty($thesis_title)) {
-        $stmt2 = $conn->prepare("INSERT INTO thesis (thesis_group_id, title, alumni_id) VALUES (?, ?, ?)");
+        $stmt2 = $conn->prepare("INSERT INTO thesis (thesis_group_id, title, alumni_id, thesis_date) VALUES (?, ?, ?, ?)");
         if ($stmt2) {
-            $stmt2->bind_param("sss", $thesis_group_id, $thesis_title, $alumni_id);
+            $stmt2->bind_param("ssss", $thesis_group_id, $thesis_title, $alumni_id, $thesis_date);
             if ($stmt2->execute()) {
                 $response['success'] = true;
                 $response['message'] = "Alumnus and thesis added successfully!";
