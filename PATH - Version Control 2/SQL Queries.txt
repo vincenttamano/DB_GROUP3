@@ -1,0 +1,13 @@
+CREATE TABLE `admin` ( `admin_id` int(11) NOT NULL, `admin_username` varchar(255) NOT NULL, `admin_password` varchar(255) NOT NULL, `alumni_id` int(11) DEFAULT NULL, `faculty_id` int(11) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+	
+CREATE TABLE `alumni` ( `alumni_profile_id` int(11) NOT NULL, `alumni_id` varchar(20) NOT NULL, `student_id` varchar(20) NOT NULL, `last_name` varchar(255) NOT NULL, `first_name` varchar(255) NOT NULL, `middle_name` varchar(255) DEFAULT NULL, `email` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `employment_status` varchar(50) DEFAULT NULL, `college_and_course` varchar(100) DEFAULT NULL, `graduation_year` year(4) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `faculty` ( `id` int(11) NOT NULL, `faculty_id` varchar(20) DEFAULT NULL, `email` varchar(50) NOT NULL, `password` varchar(255) NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE `faculty` CHANGE `id` `faculty_profile_id` INT(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `thesis` ( `thesis_id` int(11) NOT NULL, `alumni_id` varchar(50) DEFAULT NULL, `title` varchar(255) NOT NULL, `thesis_group_id` varchar(255) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+	
+CREATE TABLE `work_exp_current` ( `id` int(11) NOT NULL, `alumni_id` varchar(50) NOT NULL, `current_profession` varchar(255) DEFAULT NULL, `current_work_desc` text DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `work_exp_previous` ( `id` int(11) NOT NULL, `alumni_id` varchar(50) NOT NULL, `previous_profession` varchar(255) DEFAULT NULL, `previous_work_desc` text DEFAULT NULL, `company` varchar(255) DEFAULT NULL, `work_date` varchar(50) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
